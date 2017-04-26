@@ -1,10 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ parent() ~ 'You won!' }}{% endblock %}
+{% block title %}{{ parent() ~ 'page_title.game.won'|trans }}{% endblock %}
 
 {% block content %}
-    <h2>Congratulations!</h2>
+    <h2>{{ 'subtitle.game.won'|trans }}</h2>
     <p>
-        You found the word <strong>software</strong> and won this game.
+        {{ 'content.game.won'|trans({'%word%': 'software'}) }}
     </p>
 {% endblock %}

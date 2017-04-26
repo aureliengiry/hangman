@@ -1,12 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ parent() ~ 'Let\'s play!' }}{% endblock %}
+{% block title %}{{ parent() ~ 'page_title.game.index'|trans }}{% endblock %}
 
 {% block content %}
-    <h2>Guess the mysterious word</h2>
+    <h2>{{ 'subtitle.game.index.1'|trans }}</h2>
 
     <p class="attempts">
-        You still have 11 remaining attempts.
+        {{ 'content.game.index.remaining_attempts'|transchoice(11) }}
     </p>
 
     <ul class="word_letters">
@@ -39,12 +39,12 @@
     <br class="clearfix" />
 
     <p class="attempts">
-        <a href="/game/reset">Reset the game</a>
+        <a href="/game/reset">{{ 'content.game.index.reset_link'|trans }}</a>
     </p>
 
     <br class="clearfix" />
 
-    <h2>Try a letter</h2>
+    <h2>{{ 'subtitle.game.index.2'|trans }}</h2>
 
     <ul>
         {% for letter in 'A'..'Z' %}
@@ -56,13 +56,13 @@
         {% endfor %}
     </ul>
 
-    <h2>Try a word</h2>
+    <h2>{{ 'subtitle.game.index.3'|trans }}</h2>
 
     <form action="/game/word" method="post">
         <p>
-            <label for="word">Word:</label>
+            <label for="word">{{ 'form.label.word'|trans }}</label>
             <input type="text" id="word" name="word"/>
-            <button type="submit">Let me guess...</button>
+            <button type="submit">{{ 'form.label.submit_word'|trans }}</button>
         </p>
     </form>
 {% endblock %}

@@ -1,17 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block titile %}}{{ parent() ~ 'Sign-in' }}{% endblock %}
+{% block title %}{{ parent() ~ 'Sign-in' }}{% endblock %}
 
 {% block content %}
-        <h2>Access your player account</h2>
+    <h2>Access your player account</h2>
 
-        <form action="/login_check" method="post">
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="my_login" value="" />
+    <form action="/login_check" method="post">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="my_login" value="" />
 
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="my_secret" />
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="my_secret" />
 
-            <button type="submit">login</button>
-        </form>
+        <button type="submit">login</button>
+    </form>
 {% endblock %}

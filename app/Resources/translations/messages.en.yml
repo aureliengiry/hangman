@@ -5,7 +5,7 @@ menu.login: Login
 menu.contact: Contact
 sidebar.last_games: Last Games
 sidebar.last_players: Last players
-page_title.base: Hangman -
+page_title.base: Hangman
 page_title.game.failed: You're hanged!
 subtitle.game.failed: Game Over!
 content.game.failed: Oops, you're hanged... The word to guess was <strong>%word%</strong>.

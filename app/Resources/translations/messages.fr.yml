@@ -1,27 +1,30 @@
-main_title: Le Pendu
+main_title: 'Le Pendu'
 menu.game: Jouer
-menu.register: S'enregistrer
-menu.login: Se connecter
+menu.register: 'S''enregistrer'
+menu.login: 'Se connecter'
 menu.contact: Contact
-sidebar.last_games: Dernières parties
-sidebar.last_players: Derniers joueurs
-page_title.base: Le Pendu
-page_title.game.failed: Vous êtes pendu !
-subtitle.game.failed: Partie terminée !
-content.game.failed: Oups, vous êtes pendu... Le mot à trouver était <strong>%word%</strong>.
-page_title.game.index: C'est parti !
-subtitle.game.index.1: Devinez le mot caché
-content.game.index.remaining_attempts: Il reste 1 essai|Vous avez encore %count% essais.
-content.game.index.reset_link: Relancer la partie
-subtitle.game.index.2: Essayer une lettre
-subtitle.game.index.3: Essayer un mot
+sidebar.last_games: 'Dernières parties'
+sidebar.last_players: 'Derniers joueurs'
+page_title.base: 'Le Pendu'
+page_title.game.failed: 'Vous êtes pendu !'
+subtitle.game.failed: 'Partie terminée !'
+content.game.failed: 'Oups, vous êtes pendu... Le mot à trouver était <strong>%word%</strong>.'
+page_title.game.index: 'C''est parti !'
+subtitle.game.index.1: 'Devinez le mot caché'
+content.game.index.remaining_attempts: 'Il reste 1 essai|Vous avez encore %count% essais.'
+content.game.index.reset_link: 'Relancer la partie'
+subtitle.game.index.2: 'Essayer une lettre'
+subtitle.game.index.3: 'Essayer un mot'
 form.label.word: 'Mot :'
-form.label.submit_word: J'essaye...
-page_title.game.won: Vous avez gagné !
-subtitle.game.won: Félicitations !
-content.game.won: Vous avez trouvé le mot <strong>%word%</strong> et gagné cette partie.
+form.label.submit_word: 'J''essaye...'
+page_title.game.won: 'Vous avez gagné !'
+subtitle.game.won: 'Félicitations !'
+content.game.won: 'Vous avez trouvé le mot <strong>%word%</strong> et gagné cette partie.'
 page_title.main.index: Connectez-vous
-subtitle.main.index: Accéder à votre compte
-form.label.username: "Nom d'utilisateur :"
+subtitle.main.index: 'Accéder à votre compte'
+form.label.username: 'Nom d''utilisateur :'
 form.label.password: 'Mot de passe :'
-form.label.login: Se connecter
+form.label.login: 'Se connecter'
+page_title.main.contact: Contact
+subtitle.main.contact: Contactez-nous
+contact.subject: Message de Hangman.com

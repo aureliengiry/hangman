@@ -1,0 +1,27 @@
+main_title: Hangman
+menu.game: Game
+menu.register: Register
+menu.login: Login
+menu.contact: Contact
+sidebar.last_games: Last Games
+sidebar.last_players: Last players
+page_title.base: Hangman
+page_title.game.failed: You're hanged!
+subtitle.game.failed: Game Over!
+content.game.failed: Oops, you're hanged... The word to guess was <strong>%word%</strong>.
+page_title.game.index: Let's play!
+subtitle.game.index.1: Guess the mysterious word
+content.game.index.remaining_attempts: You still have %count% remaining attempts.
+content.game.index.reset_link: Reset the game
+subtitle.game.index.2: Try a letter
+subtitle.game.index.3: Try a word
+form.label.word: 'Word:'
+form.label.submit_word: Let me guess...
+page_title.game.won: You won!
+subtitle.game.won: Congratulations!
+content.game.won: You found the word <strong>%word%</strong> and won this game.
+page_title.main.index: Sign-in
+subtitle.main.index: Access your player account
+form.label.username: 'Username:'
+form.label.password: 'Password:'
+form.label.login: login

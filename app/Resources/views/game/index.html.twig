@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+
+{% block titile %}{{ parent() ~ 'Let\'s play!' }}{% endblock %}
+
+{% block content %}
+    <h2>Guess the mysterious word</h2>
+
+    <p class="attempts">
+        You still have 11 remaining attempts.
+    </p>
+
+    <ul class="word_letters">
+        <li class="letter hidden">
+            ?
+        </li>
+        <li class="letter hidden">
+            ?
+        </li>
+        <li class="letter hidden">
+            ?
+        </li>
+        <li class="letter hidden">
+            ?
+        </li>
+        <li class="letter hidden">
+            ?
+        </li>
+        <li class="letter hidden">
+            ?
+        </li>
+        <li class="letter hidden">
+            ?
+        </li>
+        <li class="letter hidden">
+            ?
+        </li>
+    </ul>
+
+    <br class="clearfix" />
+
+    <p class="attempts">
+        <a href="/game/reset">Reset the game</a>
+    </p>
+
+    <br class="clearfix" />
+
+    <h2>Try a letter</h2>
+
+    <ul>
+        {% for letter in 'A'..'Z' %}
+            <li class="letter">
+                <a href="/game/letter/{{ letter }}">
+                    {{ letter }}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <h2>Try a word</h2>
+
+    <form action="/game/word" method="post">
+        <p>
+            <label for="word">Word:</label>
+            <input type="text" id="word" name="word"/>
+            <button type="submit">Let me guess...</button>
+        </p>
+    </form>
+{% enblock %}

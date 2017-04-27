@@ -10,9 +10,11 @@ services:
 
     app.game.loader.txt_file:
         class: AppBundle\Game\Loader\TextFileLoader
+        public: false
 
     app.game.loader.xml_file:
         class: AppBundle\Game\Loader\XmlFileLoader
+        public: false
 
     app.game.word_list:
         class: AppBundle\Game\WordList
@@ -20,10 +22,12 @@ services:
             - [addLoader, ['txt', '@app.game.loader.txt_file']]
             - [addLoader, ['xml', '@app.game.loader.xml_file']]
             - [loadDictionaries, ['%app.game.dictionaries%']]
+        public: false
 
     app.game.game_context:
         class: AppBundle\Game\GameContext
         arguments: ['@session']
+        public: false
 
     app.game.game_runner:
         class: AppBundle\Game\GameRunner

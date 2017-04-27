@@ -33,14 +33,7 @@ class MainController extends Controller
         ;
 
         if ($form->isSubmitted() && $form->isValid()) {
-
-            $message = \Swift_Message::newInstance($this->get('translator')->trans('contact.subject'))
-                ->setTo($this->getParameter('webmaster_mail'))
-                ->setFrom($contactMessage->getSenderEmail(), $contactMessage->getSenderName())
-                ->setBody($contactMessage->getContent())
-            ;
-
-            $this->get('mailer')->send($message);
+            // todo send mail
 
             $this->addFlash('success', 'Votre mail est bien parti ! Merci !!');
 

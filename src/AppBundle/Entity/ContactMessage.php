@@ -8,16 +8,23 @@ class ContactMessage
 {
     /**
      * @Assert\NotBlank()
+     * @Assert\Type("string")
+     * @Assert\Length(max=255)
      */
     private $senderName = '';
 
     /**
      * @Assert\NotBlank()
+     * @Assert\Email()
+     * @Assert\Type("string")
+     * @Assert\Length(max=255)
      */
     private $senderEmail = '';
 
     /**
      * @Assert\NotBlank()
+     * @Assert\Type("string")
+     * @Assert\Length(min=10, max=1000)
      */
     private $content = '';
 

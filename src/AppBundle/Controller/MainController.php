@@ -27,15 +27,12 @@ class MainController extends Controller
     public function contactAction(Request $request)
     {
         $contactMessage = new ContactMessage();
-        dump($contactMessage);
 
         $form = $this->createForm(ContactType::class, $contactMessage)
                  ->handleRequest($request)
         ;
 
         if ($form->isSubmitted() && $form->isValid()) {
-
-            dump($contactMessage);
 
             $message = \Swift_Message::newInstance($this->get('translator')->trans('contact.subject'))
                 ->setTo($this->getParameter('webmaster_mail'))
@@ -44,6 +41,8 @@ class MainController extends Controller
             ;
 
             $this->get('mailer')->send($message);
+
+            $this->addFlash('success', 'Votre mail est bien parti ! Merci !!');
 
             return $this->redirectToRoute('app_main_contact');
         }

@@ -5,5 +5,5 @@
 {% block content %}
     <h2>{{ 'subtitle.main.contact'|trans }}</h2>
 
-    {{ form(contact_form) }}
+    {{ form(contact_form, { attr: { novalidate: '' } }) }}
 {% endblock %}

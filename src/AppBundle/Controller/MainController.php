@@ -27,14 +27,12 @@ class MainController extends Controller
     public function contactAction(Request $request)
     {
         $contactMessage = new ContactMessage();
-
         $form = $this->createForm(ContactType::class, $contactMessage)
                  ->handleRequest($request)
         ;
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // todo send mail
-
+            $this->get('app.contact.contact_mailer')->sendMessage($contactMessage);
             $this->addFlash('success', 'Votre mail est bien parti ! Merci !!');
 
             return $this->redirectToRoute('app_main_contact');

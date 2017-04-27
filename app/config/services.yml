@@ -32,3 +32,7 @@ services:
     app.game.game_runner:
         class: AppBundle\Game\GameRunner
         arguments: ['@app.game.game_context', '@app.game.word_list']
+
+    app.contact.contact_mailer:
+        class: AppBundle\Contact\ContactMailer
+        arguments: ['@mailer', '@translator', '%webmaster_mail%']

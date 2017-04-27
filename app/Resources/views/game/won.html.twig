@@ -5,6 +5,8 @@
 {% block content %}
     <h2>{{ 'subtitle.game.won'|trans }}</h2>
     <p>
-        {{ 'content.game.won'|trans({'%word%': 'software'}) }}
+        {% trans with {'%word%': 'software'} %}
+            content.game.won
+        {% endtrans %}
     </p>
 {% endblock %}

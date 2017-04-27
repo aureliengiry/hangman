@@ -3,43 +3,26 @@
 {% block title %}{{ parent() ~ ' - ' ~ 'page_title.game.index'|trans }}{% endblock %}
 
 {% block content %}
+    {{ dump() }}
+
     <h2>{{ 'subtitle.game.index.1'|trans }}</h2>
 
     <p class="attempts">
-        {{ 'content.game.index.remaining_attempts'|transchoice(11) }}
+        {{ 'content.game.index.remaining_attempts'|transchoice(game.remainingAttempts) }}
     </p>
 
     <ul class="word_letters">
-        <li class="letter hidden">
-            ?
-        </li>
-        <li class="letter hidden">
-            ?
-        </li>
-        <li class="letter hidden">
-            ?
-        </li>
-        <li class="letter hidden">
-            ?
-        </li>
-        <li class="letter hidden">
-            ?
-        </li>
-        <li class="letter hidden">
-            ?
-        </li>
-        <li class="letter hidden">
-            ?
-        </li>
-        <li class="letter hidden">
-            ?
-        </li>
+        {% for letter in game.wordLetters %}
+            <li class="letter">
+                {{ game.letterFound(letter) ? letter : '?' }}
+            </li>
+        {% endfor %}
     </ul>
 
     <br class="clearfix" />
 
     <p class="attempts">
-        <a href="/game/reset">{{ 'content.game.index.reset_link'|trans }}</a>
+        <a href="{{ path('app_game_reset') }}">{{ 'content.game.index.reset_link'|trans }}</a>
     </p>
 
     <br class="clearfix" />
@@ -49,7 +32,7 @@
     <ul>
         {% for letter in 'A'..'Z' %}
             <li class="letter">
-                <a href="/game/letter/{{ letter }}">
+                <a href="{{ path('app_game_play_letter', {'letter': letter}) }}">
                     {{ letter }}
                 </a>
             </li>
@@ -58,7 +41,7 @@
 
     <h2>{{ 'subtitle.game.index.3'|trans }}</h2>
 
-    <form action="/game/word" method="post">
+    <form action="{{ path('app_game_play_word') }}" method="post">
         <p>
             <label for="word">{{ 'form.label.word'|trans }}</label>
             <input type="text" id="word" name="word"/>

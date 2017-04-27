@@ -33,7 +33,9 @@ class GameController extends Controller
      */
     public function wonAction(Request $request)
     {
-        return $this->render('game/won.html.twig');
+        return $this->render('game/won.html.twig', [
+            'game' => $this->getRunner($request->getSession())->resetGameOnSuccess()
+        ]);
     }
 
     /**
@@ -41,7 +43,9 @@ class GameController extends Controller
      */
     public function failedAction(Request $request)
     {
-        return $this->render('game/failed.html.twig');
+        return $this->render('game/failed.html.twig', [
+            'game' => $this->getRunner($request->getSession())->resetGameOnFailure()
+        ]);
     }
 
     /**

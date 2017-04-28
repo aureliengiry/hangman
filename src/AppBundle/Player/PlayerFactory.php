@@ -9,7 +9,7 @@ class PlayerFactory
 {
     private $encoder;
 
-    function __construct(PasswordEncoderInterface $encoder)
+    public function __construct(PasswordEncoderInterface $encoder)
     {
         $this->encoder = $encoder;
     }

@@ -27,6 +27,7 @@ class GameController extends Controller
 
     /**
      * @Route("/won", name="app_game_won")
+     * @Method("GET")
      */
     public function wonAction()
     {
@@ -37,6 +38,7 @@ class GameController extends Controller
 
     /**
      * @Route("/failed", name="app_game_failed")
+     * @Method("GET")
      */
     public function failedAction()
     {

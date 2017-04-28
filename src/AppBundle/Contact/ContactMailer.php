@@ -11,7 +11,7 @@ class ContactMailer
     private $translator;
     private $recipient;
 
-    function __construct(\Swift_Mailer $mailer, TranslatorInterface $translator, $recipient)
+    public function __construct(\Swift_Mailer $mailer, TranslatorInterface $translator, $recipient)
     {
         $this->mailer = $mailer;
         $this->translator = $translator;

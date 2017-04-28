@@ -44,3 +44,4 @@ class GameContext implements GameContextInterface
         $this->session->set('hangman', $game->getContext());
     }
 }
+

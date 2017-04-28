@@ -10,10 +10,14 @@
                 <a href="{{ path('app_game_index') }}">{{ 'menu.game'|trans }}</a>
             </li>
             <li>
-                <a href="/signup">{{ 'menu.register'|trans }}</a>
+                <a href="{{ path('app_main_register') }}">{{ 'menu.register'|trans }}</a>
             </li>
             <li>
-                <a href="/signin">{{ 'menu.login'|trans }}</a>
+                {% if app.user %}
+                    <a href="{{ path('app_security_logout') }}">{{ 'menu.logout'|trans }}</a>
+                {% else %}
+                    <a href="{{ path('app_main_index') }}">{{ 'menu.login'|trans }}</a>
+                {% endif %}
             </li>
             <li>
                 <a href="{{ path('app_main_contact') }}">{{ 'menu.contact'|trans }}</a>

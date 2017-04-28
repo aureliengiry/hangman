@@ -2,6 +2,7 @@ main_title: Hangman
 menu.game: Game
 menu.register: Register
 menu.login: Login
+menu.logout: Logout
 menu.contact: Contact
 sidebar.last_games: 'Last Games'
 sidebar.last_players: 'Last players'
@@ -24,7 +25,10 @@ page_title.main.index: Sign-in
 subtitle.main.index: 'Access your player account'
 form.label.username: 'Username:'
 form.label.password: 'Password:'
+form.label.password_repeat: 'Repeat your password:'
 form.label.login: login
 page_title.main.contact: Contact us
 subtitle.main.contact: Contact us
 contact.subject: Message from Hangman.com
+page_title.main.regsister: Register
+subtitle.main.register: Create your account

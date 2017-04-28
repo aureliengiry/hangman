@@ -2,6 +2,7 @@ main_title: 'Le Pendu'
 menu.game: Jouer
 menu.register: 'S''enregistrer'
 menu.login: 'Se connecter'
+menu.logout: Se déconnecter
 menu.contact: Contact
 sidebar.last_games: 'Dernières parties'
 sidebar.last_players: 'Derniers joueurs'
@@ -24,7 +25,10 @@ page_title.main.index: Connectez-vous
 subtitle.main.index: 'Accéder à votre compte'
 form.label.username: 'Nom d''utilisateur :'
 form.label.password: 'Mot de passe :'
+form.label.password_repeat: 'Répétez votre mot de passe :'
 form.label.login: 'Se connecter'
 page_title.main.contact: Contact
 subtitle.main.contact: Contactez-nous
 contact.subject: Message de Hangman.com
+page_title.main.regsister: S'enregistrer
+subtitle.main.register: Créer votre compte

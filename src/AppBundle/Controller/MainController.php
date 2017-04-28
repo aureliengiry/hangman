@@ -55,8 +55,6 @@ class MainController extends Controller
      */
     public function registerAction(Request $request)
     {
-        //$contactMessage = new ContactMessage();
-
         $form = $this->createForm(PlayerRegistrationType::class)
                  ->handleRequest($request)
         ;

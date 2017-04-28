@@ -2,12 +2,34 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
+/**
+ * @ORM\Entity
+ */
 class Player implements UserInterface
 {
+    /**
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\Column(type="integer")
+     */
+    private $id;
+
+    /**
+     * @ORM\Column
+     */
     private $username;
+
+    /**
+     * @ORM\Column
+     */
     private $password;
+
+    /**
+     * @ORM\Column
+     */
     private $email;
 
     public function __construct($username, $password, $email)
@@ -15,6 +37,14 @@ class Player implements UserInterface
         $this->username = $username;
         $this->password = $password;
         $this->email = $email;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
     }
 
     /**
@@ -49,10 +79,15 @@ class Player implements UserInterface
     }
 
     /**
-     * Removes sensitive data from the user.
-     *
-     * This is important if, at any given point, sensitive information like
-     * the plain-text password is stored on this object.
+     * @return mixed
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * {@inheritdoc}
      */
     public function eraseCredentials()
     {

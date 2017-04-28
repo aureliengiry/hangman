@@ -62,9 +62,16 @@ class MainController extends Controller
         ;
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // todo registration => player
+            $player = $this->get('app.player.factory')->createPlayer($form->getData());
 
-            return $this->redirectToRoute('app_main_contact');
+            $manager = $this->getDoctrine()->getManager();
+
+            $manager->persist($player);
+            $manager->flush();
+
+            $this->addFlash('success', 'player.register.success');
+
+            return $this->redirectToRoute('app_main_index');
         }
 
         return $this->render('main/register.html.twig', [

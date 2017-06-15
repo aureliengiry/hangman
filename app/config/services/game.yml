@@ -1,0 +1,19 @@
+parameters:
+    app.game.dictionaries:
+        - '%kernel.root_dir%/Resources/data/test.txt'
+        - '%kernel.root_dir%/Resources/data/words.txt'
+        - '%kernel.root_dir%/Resources/data/words.xml'
+
+services:
+    AppBundle\Game\:
+        resource: '../../../src/AppBundle/Game/*'
+        exclude: '../../../src/AppBundle/Game/Game.php'
+        autowire: true
+
+    AppBundle\Game\Loader\TextFileLoader:
+        tags:
+            - { name: app.game.dictionary_loader, loader_type: txt }
+
+    AppBundle\Game\Loader\XmlFileLoader:
+        tags:
+            - { name: app.game.dictionary_loader, loader_type: xml }

@@ -1,46 +1,19 @@
 # Learn more about services, parameters and containers at
 # http://symfony.com/doc/current/service_container.html
 parameters:
-    app.game.dictionaries:
-        - '%kernel.root_dir%/Resources/data/test.txt'
-        - '%kernel.root_dir%/Resources/data/words.txt'
-        - '%kernel.root_dir%/Resources/data/words.xml'
 
 services:
-    _defaults:
-        public: false
-
     ## Contact
-    app.contact.contact_mailer:
-        class: AppBundle\Contact\ContactMailer
-        arguments: ['@mailer', '@translator', '%webmaster_mail%']
-        public: true
-
-    ## Game
-    AppBundle\Game\Loader\TextFileLoader:
-        tags:
-            - { name: app.game.dictionary_loader, loader_type: txt }
-
-    AppBundle\Game\Loader\XmlFileLoader:
-        tags:
-            - { name: app.game.dictionary_loader, loader_type: xml }
-
-    AppBundle\Game\GameContext: ['@session']
-
-    app.game.game_runner:
-        class: AppBundle\Game\GameRunner
-        arguments: ['@AppBundle\Game\GameContext', '@app.game.word_list']
-        public: true
-
-    AppBundle\Game\WordList: ~
+    AppBundle\Contact\ContactMailer:
+        arguments:
+            $recipient: '%webmaster_mail%'
+        autowire: true
 
     ## Player
-    app.player.factory:
-        class: AppBundle\Player\PlayerFactory
-        arguments: ['@app.player.password']
-        public: true
+    AppBundle\Player\PlayerFactory: ['@app.player.password']
 
     app.player.password:
         class: Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface
         factory: ['@security.encoder_factory', getEncoder]
         arguments: [AppBundle\Entity\Player]
+        public: false

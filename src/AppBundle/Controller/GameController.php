@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Game\GameRunner;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
@@ -21,7 +22,7 @@ class GameController extends Controller
     public function indexAction()
     {
         return $this->render('game/index.html.twig', [
-            'game' => $this->get('app.game.game_runner')->loadGame(),
+            'game' => $this->get(GameRunner::class)->loadGame(),
         ]);
     }
 
@@ -32,7 +33,7 @@ class GameController extends Controller
     public function wonAction()
     {
         return $this->render('game/won.html.twig', [
-            'game' => $this->get('app.game.game_runner')->resetGameOnSuccess()
+            'game' => $this->get(GameRunner::class)->resetGameOnSuccess()
         ]);
     }
 
@@ -43,7 +44,7 @@ class GameController extends Controller
     public function failedAction()
     {
         return $this->render('game/failed.html.twig', [
-            'game' => $this->get('app.game.game_runner')->resetGameOnFailure()
+            'game' => $this->get(GameRunner::class)->resetGameOnFailure()
         ]);
     }
 
@@ -53,7 +54,7 @@ class GameController extends Controller
      */
     public function resetAction()
     {
-        $this->get('app.game.game_runner')->resetGame();
+        $this->get(GameRunner::class)->resetGame();
 
         return $this->redirectToRoute('app_game_index');
     }
@@ -64,7 +65,7 @@ class GameController extends Controller
      */
     public function playLetterAction($letter, Request $request)
     {
-        $game = $this->get('app.game.game_runner')->playLetter($letter);
+        $game = $this->get(GameRunner::class)->playLetter($letter);
 
         if ($game->isWon()) {
             return $this->redirectToRoute('app_game_won');
@@ -84,7 +85,7 @@ class GameController extends Controller
     public function playWordAction(Request $request)
     {
         $word = $request->request->getAlpha('word');
-        $game = $this->get('app.game.game_runner')->playWord($word);
+        $game = $this->get(GameRunner::class)->playWord($word);
 
         if ($game->isWon()) {
             return $this->redirectToRoute('app_game_won');

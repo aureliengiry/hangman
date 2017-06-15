@@ -2,9 +2,11 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Contact\ContactMailer;
 use AppBundle\Entity\ContactMessage;
 use AppBundle\Form\Type\ContactType;
 use AppBundle\Form\Type\PlayerRegistrationType;
+use AppBundle\Player\PlayerFactory;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -38,7 +40,7 @@ class MainController extends Controller
         ;
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->get('app.contact.contact_mailer')->sendMessage($contactMessage);
+            $this->get(ContactMailer::class)->sendMessage($contactMessage);
             $this->addFlash('success', 'Votre mail est bien parti ! Merci !!');
 
             return $this->redirectToRoute('app_main_contact');
@@ -60,7 +62,7 @@ class MainController extends Controller
         ;
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $player = $this->get('app.player.factory')->createPlayer($form->getData());
+            $player = $this->get(PlayerFactory::class)->createPlayer($form->getData());
 
             $manager = $this->getDoctrine()->getManager();
 

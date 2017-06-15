@@ -7,44 +7,40 @@ parameters:
         - '%kernel.root_dir%/Resources/data/words.xml'
 
 services:
+    _defaults:
+        public: false
+
     ## Contact
     app.contact.contact_mailer:
         class: AppBundle\Contact\ContactMailer
         arguments: ['@mailer', '@translator', '%webmaster_mail%']
+        public: true
 
     ## Game
-    app.game.loader.txt_file:
-        class: AppBundle\Game\Loader\TextFileLoader
-        public: false
+    AppBundle\Game\Loader\TextFileLoader:
+        tags:
+            - { name: app.game.dictionary_loader, loader_type: txt }
 
-    app.game.loader.xml_file:
-        class: AppBundle\Game\Loader\XmlFileLoader
-        public: false
+    AppBundle\Game\Loader\XmlFileLoader:
+        tags:
+            - { name: app.game.dictionary_loader, loader_type: xml }
 
-    app.game.game_context:
-        class: AppBundle\Game\GameContext
-        arguments: ['@session']
-        public: false
+    AppBundle\Game\GameContext: ['@session']
 
     app.game.game_runner:
         class: AppBundle\Game\GameRunner
-        arguments: ['@app.game.game_context', '@app.game.word_list']
+        arguments: ['@AppBundle\Game\GameContext', '@app.game.word_list']
+        public: true
 
-    app.game.word_list:
-        class: AppBundle\Game\WordList
-        calls:
-            - [addLoader, ['txt', '@app.game.loader.txt_file']]
-            - [addLoader, ['xml', '@app.game.loader.xml_file']]
-            - [loadDictionaries, ['%app.game.dictionaries%']]
-        public: false
+    AppBundle\Game\WordList: ~
 
     ## Player
     app.player.factory:
         class: AppBundle\Player\PlayerFactory
         arguments: ['@app.player.password']
+        public: true
 
     app.player.password:
         class: Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface
         factory: ['@security.encoder_factory', getEncoder]
         arguments: [AppBundle\Entity\Player]
-        public: false

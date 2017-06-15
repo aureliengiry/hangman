@@ -1,5 +1,7 @@
 <?php
 
+use AppBundle\DependencyInjection\Compiler\DictionaryLoaderPass;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Config\Loader\LoaderInterface;
 
@@ -23,6 +25,10 @@ class AppKernel extends Kernel
             $bundles[] = new Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
             $bundles[] = new Sensio\Bundle\DistributionBundle\SensioDistributionBundle();
             $bundles[] = new Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle();
+
+            if ('dev' === $this->environment) {
+                $bundles[] = new \Symfony\Bundle\WebServerBundle\WebServerBundle();
+            }
         }
 
         return $bundles;
@@ -45,6 +51,11 @@ class AppKernel extends Kernel
 
     public function registerContainerConfiguration(LoaderInterface $loader)
     {
-        $loader->load($this->getRootDir().'/config/config_'.$this->getEnvironment().'.yml');
+        $loader->load($this->rootDir.'/config/config_'.$this->environment.'.yml');
+    }
+
+    protected function build(ContainerBuilder $container)
+    {
+        $container->addCompilerPass(new DictionaryLoaderPass());
     }
 }

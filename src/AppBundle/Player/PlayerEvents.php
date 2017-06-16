@@ -13,6 +13,9 @@ namespace AppBundle\Player;
 
 class PlayerEvents
 {
+    /**
+     * @Event("AppBundle\Player\PlayerEvent")
+     */
     const REGISTRATION = 'player.registration';
 
     /**

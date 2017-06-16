@@ -56,6 +56,8 @@ class GameRunner
         $game = $this->context->newGame($word);
         $this->context->save($game);
 
+        // dispatch start
+
         return $game;
     }
 
@@ -112,6 +114,8 @@ class GameRunner
         }
 
         $this->context->reset();
+        
+        // dispatch over
 
         return $game;
     }
@@ -126,6 +130,8 @@ class GameRunner
             if (!$game->isWon()) {
                 throw $this->createNotFoundException('Current game must be won.');
             }
+
+            // dispatch won
         };
 
         return $this->resetGame($onWonGame);
@@ -141,6 +147,8 @@ class GameRunner
             if (!$game->isHanged()) {
                 throw $this->createNotFoundException('Current game must be lost.');
             }
+
+            // dispatch failed
         };
 
         return $this->resetGame($onLostGame);

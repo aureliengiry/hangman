@@ -17,6 +17,13 @@ services:
         arguments:
             $recipient: '%webmaster_mail%'
 
+    ## Data Collector
+    AppBundle\DataCollector\ComposerDataCollector:
+        tags:
+            - name: data_collector
+              id: composer
+              template: collector/composer.html.twig
+
     ## Form
     AppBundle\Form\Type\Extension\HelpFormTypeExtension:
         tags:

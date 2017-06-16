@@ -1,0 +1,54 @@
+{% extends '@WebProfiler/Profiler/layout.html.twig' %}
+
+{% block toolbar %}
+    {% set icon %}
+        <span class="sf-toolbar-value">{{ collector.packagesCount }}</span>
+        <span class="sf-toolbar-label">Composer Packages</span>
+    {% endset %}
+    {% set text %}
+        <div class="sf-toolbar-info-piece">
+            <b>Packages</b>
+            <span>{{ collector.packagesCount }}</span>
+        </div>
+        <div class="sf-toolbar-info-piece">
+            <b>Packages - Dev</b>
+            <span>{{ collector.packagesDevCount }}</span>
+        </div>
+    {% endset %}
+
+    {{ include('@WebProfiler/Profiler/toolbar_item.html.twig',
+    { 'link': profiler_url }
+    )}}
+
+{% endblock %}
+
+{% block menu %}
+    <span class="label">
+        <span class="icon">
+            <span class="glyphicon-tower"></span>
+        </span>
+        <strong>Composer</strong>
+    </span>
+{% endblock %}
+
+{% block panel %}
+    <h2>Installed Composer packages</h2>
+    <table>
+    <thead>
+        <tr>
+            <th scope="col">Package</th>
+            <th scope="col">License</th>
+            <th scope="col">Version</th>
+        </tr>
+        </thead>
+        <tbody>
+            {% for package in collector.packages %}
+                <tr>
+                    <td>{{ package.name }}</td>
+                    <td>{{ package.license|join(', ') }}</td>
+                    <td>{{ package.version }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

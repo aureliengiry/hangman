@@ -2,7 +2,9 @@
 
 namespace AppBundle\Game;
 
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class GameRunner
 {
@@ -20,6 +22,10 @@ class GameRunner
      */
     private $wordList;
 
+    private $dispatcher;
+
+    private $tokenStorage;
+
     /**
      * Constructor.
      *
@@ -28,11 +34,15 @@ class GameRunner
      */
     public function __construct(
         GameContextInterface $context,
-        WordListInterface $wordList = null
+        WordListInterface $wordList = null,
+        EventDispatcherInterface $eventDispatcher,
+        TokenStorageInterface $tokenStorage
     )
     {
         $this->context = $context;
         $this->wordList = $wordList;
+        $this->dispatcher = $eventDispatcher;
+        $this->tokenStorage = $tokenStorage;
     }
 
     /**
@@ -55,8 +65,8 @@ class GameRunner
         $word = $this->wordList->getRandomWord($length);
         $game = $this->context->newGame($word);
         $this->context->save($game);
+        $this->dispatch(GameEvents::START, $game);
 
-        // dispatch start
 
         return $game;
     }
@@ -114,8 +124,8 @@ class GameRunner
         }
 
         $this->context->reset();
-        
-        // dispatch over
+
+        $this->dispatch(GameEvents::OVER, $game);
 
         return $game;
     }
@@ -131,7 +141,7 @@ class GameRunner
                 throw $this->createNotFoundException('Current game must be won.');
             }
 
-            // dispatch won
+            $this->dispatch(GameEvents::WON, $game);
         };
 
         return $this->resetGame($onWonGame);
@@ -148,7 +158,7 @@ class GameRunner
                 throw $this->createNotFoundException('Current game must be lost.');
             }
 
-            // dispatch failed
+            $this->dispatch(GameEvents::FAILED, $game);
         };
 
         return $this->resetGame($onLostGame);
@@ -157,5 +167,13 @@ class GameRunner
     private function createNotFoundException($message)
     {
         return new NotFoundHttpException($message);
+    }
+
+    private function dispatch($eventName, $game): void
+    {
+        $this->dispatcher->dispatch($eventName, new GameEvent(
+            $this->tokenStorage->getToken()->getUser(),
+            $game
+        ));
     }
 }

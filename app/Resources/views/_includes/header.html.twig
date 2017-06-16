@@ -22,6 +22,9 @@
             <li>
                 <a href="{{ path('app_main_contact') }}">{{ 'menu.contact'|trans }}</a>
             </li>
+            <li>
+                <a href="{{ alt_path(app.request.attributes.get('_route'), app.request.locale, app.request.attributes.get('_route_params')) }}">TEST</a>
+            </li>
         </ul>
         <br class="clearfix" />
     </div>

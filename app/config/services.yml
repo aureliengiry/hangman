@@ -59,3 +59,10 @@ services:
         arguments: ['%game_count_limit_per_player%']
         tags:
             - name: security.voter
+
+    ## Twig
+    AppBundle\Twig\AppExtension:
+        public: false
+        autowire: true
+        tags:
+            - name: twig.extension

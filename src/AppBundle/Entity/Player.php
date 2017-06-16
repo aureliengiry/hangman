@@ -35,7 +35,12 @@ class Player implements UserInterface
     /**
      * @ORM\Column(type="boolean", options={"default"=false})
      */
-    private $activated;
+    private $activated = false;
+
+    /**
+     * @ORM\Column(type="smallint", options={"default"=0})
+     */
+    private $gamesCount = 0;
 
     public function __construct($username, $password, $email, PlayerRegistrationToken $token)
     {
@@ -43,7 +48,6 @@ class Player implements UserInterface
         $this->password = $password;
         $this->email = $email;
         $this->registrationToken = $token;
-        $this->activated = false;
     }
 
     /**
@@ -97,6 +101,11 @@ class Player implements UserInterface
     {
         $this->activated = true;
         $this->registrationToken = null;
+    }
+
+    public function increaseGamesCount()
+    {
+        ++$this->gamesCount;
     }
 
     /**

@@ -169,7 +169,7 @@ class GameRunner
         return new NotFoundHttpException($message);
     }
 
-    private function dispatch($eventName, $game): void
+    private function dispatch($eventName, $game)
     {
         $this->dispatcher->dispatch($eventName, new GameEvent(
             $this->tokenStorage->getToken()->getUser(),

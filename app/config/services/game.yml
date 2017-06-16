@@ -7,7 +7,7 @@ parameters:
 services:
     AppBundle\Game\:
         resource: '../../../src/AppBundle/Game/*'
-        exclude: '../../../src/AppBundle/Game/Game.php'
+        exclude: '../../../src/AppBundle/Game/{Game,GameEvent,GameEvents}.php'
         autowire: true
 
     AppBundle\Game\Loader\TextFileLoader:

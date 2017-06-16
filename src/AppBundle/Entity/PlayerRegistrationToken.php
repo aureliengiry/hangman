@@ -49,6 +49,11 @@ class PlayerRegistrationToken
         return $this->player;
     }
 
+    public function setPlayer(Player $player)
+    {
+        $this->player = $player;
+    }
+
     public function activate()
     {
         return $this->player->confirm();

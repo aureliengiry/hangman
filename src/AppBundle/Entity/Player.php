@@ -48,6 +48,7 @@ class Player implements UserInterface
         $this->password = $password;
         $this->email = $email;
         $this->registrationToken = $token;
+        $token->setPlayer($this);
     }
 
     /**

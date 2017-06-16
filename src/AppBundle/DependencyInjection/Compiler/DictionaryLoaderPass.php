@@ -3,6 +3,7 @@
 namespace AppBundle\DependencyInjection\Compiler;
 
 use AppBundle\Game\Loader\LoaderInterface;
+use AppBundle\Game\WordList;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
@@ -16,11 +17,11 @@ class DictionaryLoaderPass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container)
     {
-        if (!$container->has('app.game.word_list')) {
+        if (!$container->has(WordList::class)) {
             return;
         }
 
-        $wordList = $container->findDefinition('app.game.word_list');
+        $wordList = $container->findDefinition(WordList::class);
         $loaders = $container->findTaggedServiceIds('app.game.dictionary_loader');
 
         if (!$loaders) {

@@ -18,6 +18,7 @@ class GameController extends Controller
     /**
      * @Route(name="app_game_index")
      * @Method("GET")
+     * @Security("has_role('ROLE_PLAYER') and is_granted('CAN_PLAY')")
      */
     public function indexAction()
     {

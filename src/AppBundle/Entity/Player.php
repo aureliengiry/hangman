@@ -97,6 +97,11 @@ class Player implements UserInterface
         return $this->registrationToken;
     }
 
+    public function getGamesCount()
+    {
+        return $this->gamesCount;
+    }
+
     public function confirm()
     {
         $this->activated = true;

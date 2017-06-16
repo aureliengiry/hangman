@@ -16,7 +16,7 @@ class GameEvent extends PlayerEvent
         parent::__construct($player);
     }
 
-    public function getGame(): Game
+    public function getGame()
     {
         return $this->game;
     }

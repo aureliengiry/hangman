@@ -30,5 +30,5 @@ form.label.login: 'Se connecter'
 page_title.main.contact: Contact
 subtitle.main.contact: Contactez-nous
 contact.subject: Message de Hangman.com
-page_title.main.regsister: S'enregistrer
-subtitle.main.register: Créer votre compte
+page_title.player.register: S'enregistrer
+subtitle.player.register: Créer votre compte

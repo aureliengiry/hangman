@@ -3,21 +3,11 @@
 namespace AppBundle\Contact;
 
 use AppBundle\Entity\ContactMessage;
+use AppBundle\Mailer\AbstractMailer;
 use Symfony\Component\Translation\TranslatorInterface;
 
-class ContactMailer
+class ContactMailer extends AbstractMailer
 {
-    private $mailer;
-    private $translator;
-    private $recipient;
-
-    public function __construct(\Swift_Mailer $mailer, TranslatorInterface $translator, $recipient)
-    {
-        $this->mailer = $mailer;
-        $this->translator = $translator;
-        $this->recipient = $recipient;
-    }
-
     public function sendMessage(ContactMessage $message)
     {
         $mail = \Swift_Message::newInstance($this->translator->trans('contact.subject'))

@@ -2,41 +2,32 @@
 
 namespace AppBundle\EventListener;
 
+use AppBundle\Player\PlayerEvents;
+use AppBundle\Player\PlayerMailer;
 use AppBundle\Player\PlayerEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\EventDispatcher\GenericEvent;
 
 class PlayerListener implements EventSubscriberInterface
 {
+    private $mailer;
+
+    public function __construct(PlayerMailer $mailer)
+    {
+        $this->mailer = $mailer;
+    }
+
     /**
-     * Returns an array of event names this subscriber wants to listen to.
-     *
-     * The array keys are event names and the value can be:
-     *
-     *  * The method name to call (priority defaults to 0)
-     *  * An array composed of the method name to call and the priority
-     *  * An array of arrays composed of the method names to call and respective
-     *    priorities, or 0 if unset
-     *
-     * For instance:
-     *
-     *  * array('eventName' => 'methodName')
-     *  * array('eventName' => array('methodName', $priority))
-     *  * array('eventName' => array(array('methodName1', $priority), array('methodName2')))
-     *
-     * @return array The event names to listen to
+     * {@inheritdoc}
      */
     public static function getSubscribedEvents()
     {
         return [
-            'player.registration' => 'onPlayerRegistering',
+            PlayerEvents::REGISTRATION => 'onPlayerRegistering',
         ];
     }
 
     public function onPlayerRegistering(PlayerEvent $event)
     {
-        $email = $event->getPlayer()->getEmail();
-        // Needs user's mail
-        // $mailer->sendEmailConfirmation()
+        $this->mailer->sendRegistrationConfirmation($event->getPlayer());
     }
 }

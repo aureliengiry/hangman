@@ -1,29 +1,26 @@
 <?php
 
-namespace AppBundle\Contact;
+namespace AppBundle\Player;
 
-use AppBundle\Entity\ContactMessage;
 use AppBundle\Entity\Player;
+use AppBundle\Mailer\AbstractMailer;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 
-class PlayerMailer
+class PlayerMailer extends AbstractMailer
 {
-    private $mailer;
-    private $translator;
     private $urlGenerator;
-    private $recipient;
 
     public function __construct(
         \Swift_Mailer $mailer,
         TranslatorInterface $translator,
-        UrlGeneratorInterface $urlGenerator,
-        $recipient
+        $recipient,
+        UrlGeneratorInterface $urlGenerator
     ) {
-        $this->mailer = $mailer;
-        $this->translator = $translator;
+        parent::__construct($mailer, $translator, $recipient);
+
         $this->urlGenerator = $urlGenerator;
-        $this->recipient = $recipient;
+
     }
 
     public function sendRegistrationConfirmation(Player $player)
@@ -34,7 +31,9 @@ class PlayerMailer
                  ->setFrom('bot@hangman.com', 'Hangman.com')
                  ->setBody($this->translator->trans('player.registration.confirmation.subject', [
                      'username' => $player->getUsername(),
-                     'confirmation_link' => $this->urlGenerator->generate(''),
+                     'confirmation_link' => $this->urlGenerator->generate('app_player_register_confirmation', [
+                         'token' => $player->getRegistrationToken(),
+                     ]),
                  ]))
         ;
 

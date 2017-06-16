@@ -10,12 +10,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class Player implements UserInterface
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     * @ORM\Column(type="integer")
-     */
-    private $id;
+    use Traits\IdentityTrait;
 
     /**
      * @ORM\Column
@@ -32,19 +27,23 @@ class Player implements UserInterface
      */
     private $email;
 
-    public function __construct($username, $password, $email)
+    /**
+     * @ORM\OneToOne(targetEntity="PlayerRegistrationToken", mappedBy="player", cascade={"persist"})
+     */
+    private $registrationToken;
+
+    /**
+     * @ORM\Column(type="boolean", options={"default"=false})
+     */
+    private $activated;
+
+    public function __construct($username, $password, $email, PlayerRegistrationToken $token)
     {
         $this->username = $username;
         $this->password = $password;
         $this->email = $email;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getId()
-    {
-        return $this->id;
+        $this->registrationToken = $token;
+        $this->activated = false;
     }
 
     /**
@@ -79,11 +78,25 @@ class Player implements UserInterface
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getEmail()
     {
         return $this->email;
+    }
+
+    /**
+     * @return PlayerRegistrationToken
+     */
+    public function getRegistrationToken()
+    {
+        return $this->registrationToken;
+    }
+
+    public function confirm()
+    {
+        $this->activated = true;
+        $this->registrationToken = null;
     }
 
     /**

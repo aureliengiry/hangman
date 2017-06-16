@@ -3,17 +3,43 @@
 parameters:
 
 services:
+    app.mailer.abstract:
+        abstract: true
+        class: AppBundle\Mailer\AbstractMailer
+        autowire: true
+
     ## Contact
     AppBundle\Contact\ContactMailer:
+        parent: app.mailer.abstract
+        class: AppBundle\Contact\ContactMailer
         arguments:
             $recipient: '%webmaster_mail%'
+
+    ## Listeners
+    AppBundle\EventListener\PlayerListener:
         autowire: true
+        tags:
+            - name: kernel.event_subscriber
 
     ## Player
     AppBundle\Player\PlayerFactory: ['@app.player.password']
+
+    AppBundle\Player\PlayerMailer:
+        parent: app.mailer.abstract
+        class: AppBundle\Player\PlayerMailer
+        arguments:
+            $recipient: '%webmaster_mail%'
+
+    AppBundle\Player\PlayerManager: ['@app.repository.player_registration_token', '@doctrine.orm.entity_manager']
 
     app.player.password:
         class: Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface
         factory: ['@security.encoder_factory', getEncoder]
         arguments: [AppBundle\Entity\Player]
         public: false
+
+    ## Repository
+    app.repository.player_registration_token:
+        class: AppBundle\Repository\PlayerRegistrationTokenRepository
+        factory: ['@doctrine', getRepository]
+        arguments: [AppBundle\Entity\PlayerRegistrationToken]

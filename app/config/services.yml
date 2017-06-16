@@ -17,6 +17,12 @@ services:
         arguments:
             $recipient: '%webmaster_mail%'
 
+    ## Form
+    AppBundle\Form\Type\Extension\HelpFormTypeExtension:
+        tags:
+            - name: form.type_extension
+              extended_type: Symfony\Component\Form\Extension\Core\Type\FormType
+
     ## Listeners
     AppBundle\EventListener\GameListener:
         autowire: true

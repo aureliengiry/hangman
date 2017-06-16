@@ -22,7 +22,9 @@ class PlayerController extends Controller
      */
     public function registerAction(Request $request)
     {
-        $form = $this->createForm(PlayerRegistrationType::class)
+        $form = $this->createForm(PlayerRegistrationType::class, null, [
+            'help' => 'Toto',
+        ])
                      ->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
